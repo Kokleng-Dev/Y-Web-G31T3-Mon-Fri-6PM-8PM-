@@ -3,6 +3,10 @@
     Customer
 @endsection
 @section('content')
+    @include('backends.customers.create')
+    @if ($customer)
+        @include('backends.customers.edit')
+    @endif
     <div class="card">
         <div class="card-header">
             <h2 class="mb-0"> Customer</h2>
@@ -24,7 +28,11 @@
                         <option value="100" {{ request()->get('per_page') == 100 ? 'selected' : '' }}>100</option>
                     </select>
                 </div>
-                <div class="col"></div>
+                <div class="col text-end">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                        Create
+                    </button>
+                </div>
             </div>
             <table class="table table-border table-sm">
                 <thead>
@@ -33,6 +41,11 @@
                         <th>Type</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
+                        <th>
+                            Address
+                        </th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +55,13 @@
                             <td>{{ $cus->customer_type_name }}</td>
                             <td>{{ $cus->full_name }}</td>
                             <td>{{ $cus->email }}</td>
+                            <td>{{ $cus->phone }}</td>
+                            <td>{{ $cus->address }}</td>
+                            <td>
+                                <a href="{{ route('customer.index') }}?id={{ $cus->id }}"
+                                    class="btn btn-success btn-sm me-1">Edit</a>
+                                <a href="{{ route('customer.delete', $cus->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

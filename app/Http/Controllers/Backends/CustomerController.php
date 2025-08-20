@@ -60,8 +60,55 @@ class CustomerController extends Controller
                     ->leftJoin('customer_types','customers.customer_type_id','=','customer_types.id')
                     ->paginate($request->get('per_page',10));
 
+        
+        $customer_types = DB::table('customer_types')->get();
+
+        $customer = null;
+
+        if($request->has('id')){
+            $customer = DB::table('customers')->find($request->get('id'));
+        }
 
 
-        return view('backends.customers.index',['customers' => $customers]);
+        return view('backends.customers.index',['customers' => $customers,'customer_types' => $customer_types, 'customer' => $customer]);
+    }
+
+    public function create(Request $request){
+
+        try {
+            $i = DB::table('customers')->insert($request->except('_token'));
+            if($i){
+                return redirect()->route('customer.index')->with('success', 'Create Successfully');
+            } 
+            
+            return redirect()->route('customer.index')->with('error', 'Create Failed');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('customer.index')->with('error', 'Create Failed: ' . $th->getMessage());
+        }
+    }
+
+    public function update(Request $request, $id){
+
+        try {
+            $i = DB::table('customers')->where('id',$id)->update($request->except('_token'));
+            if($i){
+                return redirect()->route('customer.index')->with('success', 'Update Successfully');
+            } 
+            
+            return redirect()->route('customer.index')->with('error', 'Update Failed');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('customer.index')->with('error', 'Update Failed: ' . $th->getMessage());
+        }
+    }
+
+    public function delete(Request $request, $id){
+        $d = DB::table('customers')->where('id',$id)->delete();
+
+
+        return redirect()->route('customer.index')->with('success', 'Delete Successfully');
     }
 }

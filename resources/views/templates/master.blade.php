@@ -28,12 +28,14 @@
         @include('templates.sidebar')
         <main class="app-main py-4">
             <div class="container-fluid">
+                @include('templates.alert')
                 @yield('content')
             </div>
         </main>
         @include('templates.footer')
         @include('templates.script')
         @yield('js')
+        @stack('js')
     </div>
 
 </html>
