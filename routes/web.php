@@ -13,4 +13,4 @@ Route::post('/customer/create', [CustomerController::class,'create'])->name('cus
 Route::get('/customer/delete/{id}', [CustomerController::class,'delete'])->name('customer.delete');
 Route::post('/customer/update/{id}', [CustomerController::class,'update'])->name('customer.update');
 
-
+Route::get('/test', [CustomerController::class,'test'])->name('customer.test');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backends;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -55,12 +56,15 @@ class CustomerController extends Controller
 
         // dd($customers);
 
-        $customers = DB::table('customers')
-                    ->select('customers.*','customer_types.name as customer_type_name')
-                    ->leftJoin('customer_types','customers.customer_type_id','=','customer_types.id')
-                    ->paginate($request->get('per_page',10));
+        // $customers = DB::table('customers')
+        //             ->select('customers.*','customer_types.name as customer_type_name')
+        //             ->leftJoin('customer_types','customers.customer_type_id','=','customer_types.id')
+        //             ->paginate($request->get('per_page',10));
 
-        
+        $customers = Customer::leftJoin('customer_types', 'customers.customer_type_id', '=', 'customer_types.id')
+            ->select('customers.*', 'customer_types.name as customer_type_name')
+            ->paginate($request->get('per_page', 10));
+
         $customer_types = DB::table('customer_types')->get();
 
         $customer = null;
@@ -76,7 +80,23 @@ class CustomerController extends Controller
     public function create(Request $request){
 
         try {
-            $i = DB::table('customers')->insert($request->except('_token'));
+            // query builder 
+            // $i = DB::table('customers')->insert($request->except('_token'));
+
+            // orm 
+            // $customer = new Customer;
+            // $customer->full_name = $request->get('full_name');
+            // $customer->phone = $request->get('phone');
+            // $customer->address = $request->get('address');
+            // $customer->customer_type_id = $request->get('customer_type_id');
+
+            // $i = $customer->save();
+
+
+            // orm 
+            // dd($request->except('_token'));
+            $i = Customer::create($request->except('_token'));
+
             if($i){
                 return redirect()->route('customer.index')->with('success', 'Create Successfully');
             } 
@@ -92,7 +112,18 @@ class CustomerController extends Controller
     public function update(Request $request, $id){
 
         try {
-            $i = DB::table('customers')->where('id',$id)->update($request->except('_token'));
+            // query builder 
+            // $i = DB::table('customers')->where('id',$id)->update($request->except('_token'));
+
+            // orm 
+            // $customer = Customer::find($id);
+            // $customer->full_name = $request->get('full_name');
+            // $customer->phone = $request->get('phone');
+
+            // $i = $customer->save();
+
+            $i = Customer::where('id',$id)->update($request->except('_token'));
+
             if($i){
                 return redirect()->route('customer.index')->with('success', 'Update Successfully');
             } 
@@ -110,5 +141,27 @@ class CustomerController extends Controller
 
 
         return redirect()->route('customer.index')->with('success', 'Delete Successfully');
+    }
+
+    public function test(Request $r){
+
+        DB::beginTransaction(); // Start the transaction
+        try {
+            $id = DB::table('customer_types')->insertGetId([
+                'name' => 'type test 1231'
+            ]);
+
+            DB::table('customers')->insert([
+                'customer_type_id' => $id,
+                'full_name' => 'test 123',
+                'asdsa' => 123
+            ]);
+            
+
+            DB::commit(); // Commit the transaction if all operations succeed
+        } catch (\Exception $e) {
+            DB::rollBack(); // Roll back the transaction if an error occurs
+            // Handle the exception
+        }
     }
 }
