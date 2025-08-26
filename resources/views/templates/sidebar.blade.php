@@ -34,6 +34,13 @@
                         <p>Customer</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('product.index') }}"
+                        class="nav-link {{ request()->routeIs('product.index') ? 'bg-white text-dark' : '' }}">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Product</p>
+                    </a>
+                </li>
                 {{-- menu-open --}}
                 <li class="nav-item {{ request()->routeIs('user.index') ? 'menu-open' : '' }}">
                     {{-- active --}}
