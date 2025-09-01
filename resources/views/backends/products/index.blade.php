@@ -11,16 +11,22 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Photo</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>qty</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="vertical-align: middle">
                     @foreach ($products as $key => $pro)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            <td>
+                                @if ($pro->photo)
+                                    <img src="{{ asset($pro->photo) }}" alt="" width="100">
+                                @endif
+                            </td>
                             <td>{{ $pro->category->name }}</td>
                             <td>{{ $pro->name }}</td>
                             <td>{{ $pro->price }}</td>

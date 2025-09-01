@@ -24,14 +24,14 @@
                     <a href="{{ route('home') }}"
                         class="nav-link {{ request()->routeIs('home') ? 'bg-white text-dark' : '' }}">
                         <i class="nav-icon bi bi-palette"></i>
-                        <p>Home</p>
+                        <p>{{ __('home') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('customer.index') }}"
                         class="nav-link {{ request()->routeIs('customer.index') ? 'bg-white text-dark' : '' }}">
                         <i class="nav-icon bi bi-palette"></i>
-                        <p>Customer</p>
+                        <p>{{ __('customer') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">

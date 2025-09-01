@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backends;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
+use App;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,11 @@ class HomeController extends Controller
 
         // session()->flash('success','123');
         // return redirect()->route('product.index')->with('success','123');
+
+
+        if(session()->has('locale')){
+            App::setlocale(session()->get('locale'));
+        }
         return view('backends.home.index');
     }
 }

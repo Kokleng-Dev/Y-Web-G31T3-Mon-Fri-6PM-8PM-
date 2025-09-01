@@ -17,6 +17,16 @@
             <!--end::Notifications Dropdown Menu-->
             <!--begin::Fullscreen Toggle-->
             <li class="nav-item">
+                <a class="nav-link"
+                    href="{{ route('locale', session()->has('locale') && session()->get('locale') == 'en' ? 'kh' : 'en') }}">
+                    @if (session()->has('locale'))
+                        {{ session()->get('locale') == 'en' ? 'English' : 'Khmer' }}
+                    @else
+                        Khmer
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" data-lte-toggle="fullscreen">
                     <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
                     <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
