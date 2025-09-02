@@ -7,9 +7,28 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Customer;
 
+use App\Exports\CustomersExport;
+use App\Exports\CustomersDownload;
+use App\Imports\ImportsCustomer;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 class CustomerController extends Controller
 {
+    public function export_excel(){
+        return Excel::download(new CustomersExport, 'customers.xlsx');
+    }
+
+    public function import_excel(Request $r){
+        Excel::import(new ImportsCustomer, $r->file('excel'));
+        return redirect()->back()->with('success','Import Successfully');
+    }
+    public function download(){
+        // download existing excel
+        return Excel::download(new CustomersDownload, 'customers_example.xlsx');
+    }
     public function index(Request $request){
+
         # select * from customers
         // $customers = DB::table('customers')->get();
 

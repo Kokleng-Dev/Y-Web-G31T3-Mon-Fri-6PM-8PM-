@@ -1,6 +1,6 @@
 @extends('templates.master')
 @section('title')
-    Customer
+    {{ my_title() }}
 @endsection
 @section('content')
     @include('backends.customers.create')
@@ -9,7 +9,7 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <h2 class="mb-0"> Customer</h2>
+            <h2 class="mb-0"> {{ __('customer') }}</h2>
         </div>
         <div class="card-body">
             <div class="row">
@@ -34,6 +34,10 @@
                     </button>
                 </div>
             </div>
+            <a href="{{ route('customer.export') }}" class="btn btn-sm btn-success">
+                <i class="fas fa-file-excel"></i> Export
+            </a>
+            @include('backends.customers.import')
             <table class="table table-border table-sm">
                 <thead>
                     <tr>

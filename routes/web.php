@@ -17,6 +17,13 @@ Route::middleware(['auth','switch_language'])->group(function(){
   Route::get('/customer/delete/{id}', [CustomerController::class,'delete'])->name('customer.delete');
   Route::post('/customer/update/{id}', [CustomerController::class,'update'])->name('customer.update');
 
+  // export
+  Route::get('/customer/export', [CustomerController::class,'export_excel'])->name('customer.export');
+
+  Route::post('/customer/import', [CustomerController::class,'import_excel'])->name('customer.import');
+
+  Route::get('customer/download', [CustomerController::class,'download'])->name('customer.download');
+
   Route::get('/test', [CustomerController::class,'test'])->name('customer.test');
 
 
