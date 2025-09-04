@@ -42,9 +42,11 @@
                     </a>
                 </li>
                 {{-- menu-open --}}
-                <li class="nav-item {{ request()->routeIs('user.index') ? 'menu-open' : '' }}">
+                <li
+                    class="nav-item {{ request()->routeIs('user.index') || request()->routeIs('role.index') ? 'menu-open' : '' }}">
                     {{-- active --}}
-                    <a href="#" class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ request()->routeIs('user.index') || request()->routeIs('role.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
                             Settings
@@ -52,6 +54,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            {{-- active --}}
+                            <a href="{{ route('role.index') }}"
+                                class="nav-link {{ request()->routeIs('role.index') ? 'bg-white text-dark' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Role</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             {{-- active --}}
                             <a href="{{ route('user.index') }}"

@@ -1,12 +1,12 @@
 @extends('templates.master')
 @section('title')
-    User
+    Role
 @endsection
 @section('content')
-    <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Create</a>
+    <a href="{{ route('role.create') }}" class="btn btn-primary mb-3">Create</a>
     <div class="card">
         <div class="card-header">
-            <h2 class="mb-0">User</h2>
+            <h2 class="mb-0">Role</h2>
         </div>
         <div class="card-body">
             <table class="table table-sm table-hover">
@@ -14,27 +14,22 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $index => $user)
+                    @foreach ($roles as $index => $role)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ $role->name }}</td>
                             <td>
-                                @if ($user->role)
-                                    <span class="badge bg-primary">{{ $user->role->name }}</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('role_permission.index', $role->id) }}"
+                                    class="btn btn-sm btn-dark">Permission</a>
+
+                                <a href="{{ route('role.edit', $role->id) }}" class="btn btn-sm btn-success">
                                     {{ __('edit') }}
                                 </a>
-                                <a href="{{ route('user.delete', $user->id) }}" class="btn btn-sm btn-danger">
+                                <a href="{{ route('role.delete', $role->id) }}" class="btn btn-sm btn-danger">
                                     {{ __('delete') }}
                                 </a>
                             </td>

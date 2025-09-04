@@ -1,4 +1,6 @@
 {
     "home": "My Home",
-    "customer": "Customer"
+    "customer": "Customer",
+    "edit": "Edit",
+    "delete": "Delete"
 }
