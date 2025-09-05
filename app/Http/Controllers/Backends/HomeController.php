@@ -11,6 +11,8 @@ class HomeController extends Controller
 {
     public function index(Request $r)
     {
+        // dd(checkPermission('user','view'));
+
         // // create a session with key = testing
         // $r->session()->put('testing','Hello world');
 

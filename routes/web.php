@@ -42,7 +42,10 @@ Route::middleware(['auth','switch_language'])->group(function(){
 
 
   // user
-  Route::get('/user', [UserController::class,'index'])->name('user.index');
+  Route::get('/user', [UserController::class,'index'])
+          ->name('user.index')
+          ->middleware('check_permission:user,view');
+          
   Route::get('user/create', [UserController::class,'create'])->name('user.create');
   Route::post('user/store', [UserController::class,'store'])->name('user.store');
   Route::get('user/edit/{id}', [UserController::class,'edit'])->name('user.edit');
@@ -60,6 +63,9 @@ Route::middleware(['auth','switch_language'])->group(function(){
 
   // role permission
   Route::get('/role_permission/{role_id}', [RolePermissionController::class,'role_permission'])->name('role_permission.index');
+
+  // set role permission
+  Route::post('/set_role_permission', [RolePermissionController::class,'set_role_permission'])->name('role_permission.set_permission');
 });
 
 

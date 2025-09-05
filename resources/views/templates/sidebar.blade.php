@@ -62,14 +62,16 @@
                                 <p>Role</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            {{-- active --}}
-                            <a href="{{ route('user.index') }}"
-                                class="nav-link {{ request()->routeIs('user.index') ? 'bg-white text-dark' : '' }}">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>User</p>
-                            </a>
-                        </li>
+                        @if (checkPermission('user', 'view'))
+                            <li class="nav-item">
+                                {{-- active --}}
+                                <a href="{{ route('user.index') }}"
+                                    class="nav-link {{ request()->routeIs('user.index') ? 'bg-white text-dark' : '' }}">
+                                    <i class="nav-icon bi bi-circle"></i>
+                                    <p>User</p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             </ul>
