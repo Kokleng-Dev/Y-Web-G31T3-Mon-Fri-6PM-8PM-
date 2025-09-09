@@ -12,6 +12,8 @@ use App\Http\Controllers\Backends\RolePermissionController;
 // use App\Http\Controllers\Backends\PermissionRoleController;
 // use App\Http\Controllers\Backends\RoleUserController;
 // use App\Http\Controllers\Backends\UserRoleController;
+use App\Http\Controllers\Backends\CustomerTypeController;
+use App\Http\Controllers\Backends\TestController;
 
 Auth::routes(['register' => false]);
 
@@ -66,6 +68,19 @@ Route::middleware(['auth','switch_language'])->group(function(){
 
   // set role permission
   Route::post('/set_role_permission', [RolePermissionController::class,'set_role_permission'])->name('role_permission.set_permission');
+
+  // customer type
+  Route::resource('/customer_type', CustomerTypeController::class, ['except' => ['show','destroy']])
+      ->name('index','customer_type.index')
+      ->name('create','customer_type.create')
+      ->name('store','customer_type.store')
+      ->name('edit','customer_type.edit')
+      ->name('update','customer_type.update');
+
+  Route::get('/customer_type/delete/{id}', [CustomerTypeController::class,'destroy'])->name('customer_type.destroy');
+
+  // test queue
+  Route::get('/test', [TestController::class,'test'])->name('test');
 });
 
 
@@ -74,3 +89,4 @@ Route::middleware(['auth','switch_language'])->group(function(){
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

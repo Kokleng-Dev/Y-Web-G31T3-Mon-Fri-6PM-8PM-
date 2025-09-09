@@ -28,6 +28,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('customer_type.index') }}"
+                        class="nav-link {{ request()->routeIs('customer_type.index') ? 'bg-white text-dark' : '' }}">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Customer Type</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('customer.index') }}"
                         class="nav-link {{ request()->routeIs('customer.index') ? 'bg-white text-dark' : '' }}">
                         <i class="nav-icon bi bi-palette"></i>
