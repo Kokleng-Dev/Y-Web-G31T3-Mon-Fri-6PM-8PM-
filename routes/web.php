@@ -14,6 +14,8 @@ use App\Http\Controllers\Backends\RolePermissionController;
 // use App\Http\Controllers\Backends\UserRoleController;
 use App\Http\Controllers\Backends\CustomerTypeController;
 use App\Http\Controllers\Backends\TestController;
+use Mail;
+use App\Mail\MailTest;
 
 Auth::routes(['register' => false]);
 
@@ -81,6 +83,14 @@ Route::middleware(['auth','switch_language'])->group(function(){
 
   // test queue
   Route::get('/test', [TestController::class,'test'])->name('test');
+});
+
+
+Route::get('/mail', function(){
+  // Mail::to('kongbootang@gmail.com')->send(new MailTest('88837171'));
+  // Mail::to('senghongear168@gmail.com')->send(new MailTest('88889999'));
+  // Mail::to('')->send(new MailTest('7777631721'));
+  return 'Success';
 });
 
 
