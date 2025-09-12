@@ -9,7 +9,6 @@
 
 ## Setup
 
-bash```
-composer install
-php artisan migrate
-php artisan db:seed
+```markdown
+First, install the required packages:
+```
