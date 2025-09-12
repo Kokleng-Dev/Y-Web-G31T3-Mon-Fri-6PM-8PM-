@@ -9,6 +9,26 @@
 
 ## Setup
 
+Install the required packages
+
 ```markdown
-First, install the required packages:
+composer install
+```
+
+Migrate table into db
+
+```markdown
+php artisan migrate
+```
+
+Seed data into table of db
+
+```markdown
+php artisan db:seed
+```
+
+Run project
+
+```markdown
+php artisan serve
 ```
