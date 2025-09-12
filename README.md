@@ -32,3 +32,15 @@ Run project
 ```markdown
 php artisan serve
 ```
+
+Username
+
+```markdown
+admin@gmail.com
+```
+
+Password
+
+```markdown
+123123123
+```
