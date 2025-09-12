@@ -20,9 +20,13 @@
                 <a class="nav-link"
                     href="{{ route('locale', session()->has('locale') && session()->get('locale') == 'en' ? 'kh' : 'en') }}">
                     @if (session()->has('locale'))
-                        {{ session()->get('locale') == 'en' ? 'English' : 'Khmer' }}
+                        @if (session()->get('locale') == 'en')
+                            English <i class="bi bi-arrow-right"></i> Khmer
+                        @else
+                            Khmer <i class="bi bi-arrow-right"></i> English
+                        @endif
                     @else
-                        Khmer
+                        English
                     @endif
                 </a>
             </li>

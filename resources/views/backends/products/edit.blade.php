@@ -2,10 +2,10 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h2 class="mb-0">Create Product</h2>
+            <h2 class="mb-0">Edit Product</h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('product.update', $product->id) }}') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -13,14 +13,15 @@
                     <select name="shop_id" id="shop_id" class="form-select" required>
                         <option value="">{{ __('Select a shop') }}</option>
                         @foreach ($shops as $shop)
-                            <option value="{{ $shop->id }}">{{ $shop->name }}</option>
+                            <option value="{{ $shop->id }}" {{ $shop->id == $product->shop_id ? 'selected' : '' }}>
+                                {{ $shop->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="name">Product Name</label>
-                    <input type="text" class="form-control" value="{{ old('name') }}" id="name" name="name">
+                    <input type="text" class="form-control" value="{{ $product->name }}" id="name" name="name">
                     <span class="text-danger">
                         {{ $errors->first('name') }}
                     </span>
@@ -28,7 +29,7 @@
 
                 <div class="mb-3">
                     <label for="price">Product Price</label>
-                    <input type="number" class="form-control" value="{{ old('price') }}" id="price" name="price"
+                    <input type="number" class="form-control" value="{{ $product->price }}" id="price" name="price"
                         step="0.01">
                     <span class="text-danger">
                         {{ $errors->first('price') }}
@@ -40,13 +41,15 @@
                     <select class="form-select" id="category" name="product_category_id">
                         <option value="">Select a category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}"
+                                {{ $category->id == $product->product_category_id ? 'selected' : '' }}>
+                                {{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="qty">Product Quantity</label>
-                    <input type="number" class="form-control" id="qty" name="qty">
+                    <input type="number" class="form-control" id="qty" name="qty" value="{{ $product->qty }}">
                 </div>
 
                 <div class="mb-3">
@@ -54,7 +57,7 @@
                     <input type="file" class="form-control" id="img" name="photo">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create Product</button>
+                <button type="submit" class="btn btn-primary">Update Product</button>
             </form>
         </div>
     </div>

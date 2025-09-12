@@ -1,6 +1,12 @@
 {
-    "home": "My Home",
+    "home": "Home",
     "customer": "Customer",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "shop": "Shop",
+    "role": "Role",
+    "user": "User",
+    "product": "Product",
+    "settings": "Settings",
+    "product_category": "Product Category"
 }
